@@ -3,104 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cleared Deposit Status Update Form</title>
+    <title>Enhanced Cleared Deposit Status Update Form</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h2>Cleared Deposit Status Update Form</h2>
-    <form id="depositForm" action="https://script.google.com/macros/s/AKfycbxFhwf2QAIpVvaUj_5oKtNafE_BbYrYo7WIZ71-EwKgTIKahfmAe3gSwkmrJuxVln0D/exec" method="post">
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <img src="YOUR_IMAGE_URL" alt="Logo" class="logo">
+            <nav class="sidebar-nav">
+                <a href="#step1" class="active">Shipping</a>
+                <a href="#step2">Payment</a>
+                <a href="#step3">Review</a>
+            </nav>
+        </aside>
         
-        <!-- Entity Source -->
-        <label for="entity">Entity Source:</label>
-        <select id="entity" name="entity" required>
-            <option value="">Select Entity</option>
-            <option value="OGC">OGC</option>
-            <option value="HNI">HNI</option>
-            <option value="JIB">JIB</option>
-            <option value="MSCS">MSCS</option>
-            <option value="Oleevia Foundation">Oleevia Foundation</option>
-            <option value="OWN Restaurant">OWN Restaurant</option>
-        </select>
-        <br><br>
+        <!-- Main Content -->
+        <div class="main-content">
+            <form id="depositForm" action="https://script.google.com/macros/s/AKfycbxFhwf2QAIpVvaUj_5oKtNafE_BbYrYo7WIZ71-EwKgTIKahfmAe3gSwkmrJuxVln0D/exec" method="post">
+                <h2>Shipping</h2>
+                
+                <!-- Form Fields -->
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                    
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="entity">Entity Source</label>
+                    <select id="entity" name="entity" required>
+                        <option value="">Select Entity</option>
+                        <option value="OGC">OGC</option>
+                        <option value="HNI">HNI</option>
+                        <!-- More options here -->
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" placeholder="1234 Street, City, ZIP" required>
+                </div>
 
-        <!-- State Details (Conditional for OGC) -->
-        <div id="ogcFields" style="display:none;">
-            <label for="state">State Name:</label>
-            <input type="text" id="state" name="state"><br><br>
-            <label for="stateHead">State Head (With Employee Code):</label>
-            <input type="text" id="stateHead" name="stateHead"><br><br>
-            <label for="region">Region Name:</label>
-            <input type="text" id="region" name="region"><br><br>
-            <label for="regionHead">Region Head (With Employee Code):</label>
-            <input type="text" id="regionHead" name="regionHead"><br><br>
-            <label for="cluster">Cluster Name:</label>
-            <input type="text" id="cluster" name="cluster"><br><br>
-            <label for="clusterHead">Cluster Head (With Employee Code):</label>
-            <input type="text" id="clusterHead" name="clusterHead"><br><br>
-            <label for="branch">Branch Name:</label>
-            <input type="text" id="branch" name="branch"><br><br>
+                <!-- Additional fields as required -->
+                
+                <div class="form-group">
+                    <label for="employeeID">Canvassed Person ID</label>
+                    <input type="text" id="employeeID" name="employeeID" placeholder="Enter Employee ID">
+                    <button type="button" onclick="fetchEmployeeName()">Search</button>
+                </div>
+
+                <div class="form-group">
+                    <label for="employeeName">Canvassed Person Name</label>
+                    <input type="text" id="employeeName" name="employeeName" readonly>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">Save & Continue</button>
+            </form>
+
+            <!-- Summary Panel -->
+            <div class="summary">
+                <h3>Summary</h3>
+                <div class="summary-item">
+                    <span>Black Sneakers</span>
+                    <span>$1,192.00</span>
+                </div>
+                <!-- More items here -->
+                <div class="summary-total">
+                    <span>Total</span>
+                    <span>$10,498.00</span>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <!-- Canvassed Person with Autofill -->
-        <label for="employeeID">Canvassed Person ID:</label>
-        <input type="text" id="employeeID" name="employeeID" placeholder="Enter Employee ID">
-        <button type="button" onclick="fetchEmployeeName()">Search</button><br><br>
-
-        <label for="employeeName">Canvassed Person Name:</label>
-        <input type="text" id="employeeName" name="employeeName" readonly><br><br>
-
-        <!-- Customer Details -->
-        <label for="customerName">Customer Name:</label>
-        <input type="text" id="customerName" name="customerName" required><br><br>
-
-        <label for="customerContact">Customer Contact Details:</label>
-        <input type="text" id="customerContact" name="customerContact" required><br><br>
-
-        <!-- Product Sourced -->
-        <label for="productSourced">Product Sourced:</label>
-        <select id="productSourced" name="productSourced" required>
-            <option value="">Select Product</option>
-            <option value="NCD">NCD</option>
-            <option value="CCD">CCD</option>
-            <option value="SD">SD</option>
-            <option value="Membership">Membership</option>
-            <option value="Insurance">Insurance</option>
-            <option value="RD">RD</option>
-        </select><br><br>
-
-        <!-- Payout Frequency -->
-        <label for="payoutFrequency">Payout Frequency:</label>
-        <select id="payoutFrequency" name="payoutFrequency" required>
-            <option value="Monthly">Monthly</option>
-            <option value="Quarterly">Quarterly</option>
-            <option value="Half-yearly">Half-yearly</option>
-            <option value="Annually">Annually</option>
-        </select><br><br>
-
-        <!-- Amount -->
-        <label for="amount">Amount:</label>
-        <input type="number" id="amount" name="amount" required><br><br>
-
-        <!-- Mode of Transaction -->
-        <label>Mode of Transaction:</label>
-        <input type="radio" id="cheque" name="transactionMode" value="Cheque" required>
-        <label for="cheque">Cheque</label>
-        <input type="radio" id="online" name="transactionMode" value="Online" required>
-        <label for="online">Online</label><br><br>
-
-        <!-- Application Type -->
-        <label>Application Type:</label>
-        <input type="radio" id="fresh" name="applicationType" value="Fresh" required>
-        <label for="fresh">Fresh</label>
-        <input type="radio" id="renewal" name="applicationType" value="Renewal" required>
-        <label for="renewal">Renewal</label><br><br>
-
-        <!-- Review and Submit -->
-        <input type="checkbox" id="confirmation" name="confirmation" required>
-        <label for="confirmation">I confirm that all information entered is accurate to the best of my knowledge.</label><br><br>
-
-        <input type="submit" value="Submit">
-    </form>
-
+    <!-- JavaScript functionality for autofill and other behaviors -->
     <script>
         // Show additional fields for OGC
         document.getElementById("entity").addEventListener("change", function() {
