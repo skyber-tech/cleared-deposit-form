@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2>Cleared Deposit Status Update Form</h2>
-    <form id="depositForm" action="https://script.google.com/macros/s/AKfycbw9tD6Am_d6rSlTqmIx4f51AZgmrqKpRlaxLkQdxmoTCxfcP15O0l4ixo4YfUqQ4T7r/exec" method="post" target="hidden_iframe" onsubmit="submitted=true;">
+    <form id="depositForm" action="https://script.google.com/macros/s/AKfycbxFhwf2QAIpVvaUj_5oKtNafE_BbYrYo7WIZ71-EwKgTIKahfmAe3gSwkmrJuxVln0D/exec" method="post">
         
         <!-- Entity Source -->
         <label for="entity">Entity Source:</label>
@@ -101,9 +101,6 @@
         <input type="submit" value="Submit">
     </form>
 
-    <!-- Hidden iframe to prevent form reload -->
-    <iframe name="hidden_iframe" style="display:none;"></iframe>
-
     <script>
         // Show additional fields for OGC
         document.getElementById("entity").addEventListener("change", function() {
@@ -131,15 +128,6 @@
                 document.getElementById("employeeName").value = "Employee not found";
             }
         }
-
-        // Confirmation alert upon form submission
-        let submitted = false;
-        document.getElementById("depositForm").onsubmit = function () {
-            if (submitted) {
-                alert("Your form has been submitted successfully!");
-                document.getElementById("depositForm").reset();
-            }
-        };
     </script>
 </body>
 </html>
