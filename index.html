@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleared Deposit Status Update Form</title>
+</head>
+<body>
+    <h2>Cleared Deposit Status Update Form</h2>
+    <form id="depositForm" action="https://script.google.com/macros/s/AKfycbw9tD6Am_d6rSlTqmIx4f51AZgmrqKpRlaxLkQdxmoTCxfcP15O0l4ixo4YfUqQ4T7r/exec" method="post" target="hidden_iframe" onsubmit="submitted=true;">
+        
+        <!-- Entity Source -->
+        <label for="entity">Entity Source:</label>
+        <select id="entity" name="entity" required>
+            <option value="">Select Entity</option>
+            <option value="OGC">OGC</option>
+            <option value="HNI">HNI</option>
+            <option value="JIB">JIB</option>
+            <option value="MSCS">MSCS</option>
+            <option value="Oleevia Foundation">Oleevia Foundation</option>
+            <option value="OWN Restaurant">OWN Restaurant</option>
+        </select>
+        <br><br>
+
+        <!-- State Details (Conditional for OGC) -->
+        <div id="ogcFields" style="display:none;">
+            <label for="state">State Name:</label>
+            <input type="text" id="state" name="state"><br><br>
+            <label for="stateHead">State Head (With Employee Code):</label>
+            <input type="text" id="stateHead" name="stateHead"><br><br>
+            <label for="region">Region Name:</label>
+            <input type="text" id="region" name="region"><br><br>
+            <label for="regionHead">Region Head (With Employee Code):</label>
+            <input type="text" id="regionHead" name="regionHead"><br><br>
+            <label for="cluster">Cluster Name:</label>
+            <input type="text" id="cluster" name="cluster"><br><br>
+            <label for="clusterHead">Cluster Head (With Employee Code):</label>
+            <input type="text" id="clusterHead" name="clusterHead"><br><br>
+            <label for="branch">Branch Name:</label>
+            <input type="text" id="branch" name="branch"><br><br>
+        </div>
+
+        <!-- Canvassed Person with Autofill -->
+        <label for="employeeID">Canvassed Person ID:</label>
+        <input type="text" id="employeeID" name="employeeID" placeholder="Enter Employee ID">
+        <button type="button" onclick="fetchEmployeeName()">Search</button><br><br>
+
+        <label for="employeeName">Canvassed Person Name:</label>
+        <input type="text" id="employeeName" name="employeeName" readonly><br><br>
+
+        <!-- Customer Details -->
+        <label for="customerName">Customer Name:</label>
+        <input type="text" id="customerName" name="customerName" required><br><br>
+
+        <label for="customerContact">Customer Contact Details:</label>
+        <input type="text" id="customerContact" name="customerContact" required><br><br>
+
+        <!-- Product Sourced -->
+        <label for="productSourced">Product Sourced:</label>
+        <select id="productSourced" name="productSourced" required>
+            <option value="">Select Product</option>
+            <option value="NCD">NCD</option>
+            <option value="CCD">CCD</option>
+            <option value="SD">SD</option>
+            <option value="Membership">Membership</option>
+            <option value="Insurance">Insurance</option>
+            <option value="RD">RD</option>
+        </select><br><br>
+
+        <!-- Payout Frequency -->
+        <label for="payoutFrequency">Payout Frequency:</label>
+        <select id="payoutFrequency" name="payoutFrequency" required>
+            <option value="Monthly">Monthly</option>
+            <option value="Quarterly">Quarterly</option>
+            <option value="Half-yearly">Half-yearly</option>
+            <option value="Annually">Annually</option>
+        </select><br><br>
+
+        <!-- Amount -->
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" required><br><br>
+
+        <!-- Mode of Transaction -->
+        <label>Mode of Transaction:</label>
+        <input type="radio" id="cheque" name="transactionMode" value="Cheque" required>
+        <label for="cheque">Cheque</label>
+        <input type="radio" id="online" name="transactionMode" value="Online" required>
+        <label for="online">Online</label><br><br>
+
+        <!-- Application Type -->
+        <label>Application Type:</label>
+        <input type="radio" id="fresh" name="applicationType" value="Fresh" required>
+        <label for="fresh">Fresh</label>
+        <input type="radio" id="renewal" name="applicationType" value="Renewal" required>
+        <label for="renewal">Renewal</label><br><br>
+
+        <!-- Review and Submit -->
+        <input type="checkbox" id="confirmation" name="confirmation" required>
+        <label for="confirmation">I confirm that all information entered is accurate to the best of my knowledge.</label><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- Hidden iframe to prevent form reload -->
+    <iframe name="hidden_iframe" style="display:none;"></iframe>
+
+    <script>
+        // Show additional fields for OGC
+        document.getElementById("entity").addEventListener("change", function() {
+            var ogcFields = document.getElementById("ogcFields");
+            ogcFields.style.display = this.value === "OGC" ? "block" : "none";
+        });
+
+        // Employee data for autofill based on Employee ID
+        const employeeData = {
+            "OGC001": "RAMESH CR",
+            "OLV001": "ANEESH K A",
+            "OLV002": "TITO PAUL T",
+            "OLV003": "JEESON P J",
+            "OGC002": "VISHNUPRIYA P R"
+            // Add other entries from your file as needed
+        };
+
+        // Function to autofill Employee Name based on Employee ID
+        function fetchEmployeeName() {
+            const employeeID = document.getElementById("employeeID").value;
+            const employeeName = employeeData[employeeID];
+            if (employeeName) {
+                document.getElementById("employeeName").value = employeeName;
+            } else {
+                document.getElementById("employeeName").value = "Employee not found";
+            }
+        }
+
+        // Confirmation alert upon form submission
+        let submitted = false;
+        document.getElementById("depositForm").onsubmit = function () {
+            if (submitted) {
+                alert("Your form has been submitted successfully!");
+                document.getElementById("depositForm").reset();
+            }
+        };
+    </script>
+</body>
+</html>
