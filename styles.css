@@ -10,65 +10,48 @@
 .container {
     display: flex;
     min-height: 100vh;
-    background-color: #f8f9fb;
+    background-color: #f4f6f8;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
 }
 
-/* Sidebar */
 .sidebar {
-    width: 250px;
+    width: 100%;
+    max-width: 150px;
     background-color: #4a4e69;
     color: #fff;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
 }
 
 .logo {
-    width: 100px;
-    margin-bottom: 30px;
-}
-
-.sidebar-nav a {
-    text-decoration: none;
-    color: #fff;
-    margin: 10px 0;
-    font-size: 16px;
-    padding: 10px 20px;
-    border-radius: 8px;
-    transition: background 0.3s;
-}
-
-.sidebar-nav a:hover, .sidebar-nav a.active {
-    background-color: #22223b;
+    width: 120px;
+    margin-bottom: 10px;
 }
 
 /* Main Content */
 .main-content {
-    flex: 1;
-    padding: 30px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-/* Form Styling */
-form {
     width: 100%;
     max-width: 600px;
     padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 form h2 {
     font-size: 24px;
-    color: #4a4e69;
+    color: #333333;
+    text-align: center;
     margin-bottom: 20px;
 }
 
+/* Form Styling */
 .form-group {
     display: flex;
     flex-direction: column;
@@ -80,58 +63,65 @@ form h2 {
     font-weight: 500;
 }
 
-.form-group input, .form-group select, .form-group button {
-    padding: 10px;
+.form-group input, .form-group select {
+    padding: 12px;
     font-size: 16px;
     border-radius: 8px;
     border: 1px solid #ddd;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+    appearance: none;
 }
 
 .form-group input:focus, .form-group select:focus {
     outline: none;
     border-color: #4a4e69;
+    background-color: #fff;
 }
 
-.form-group button {
-    background-color: #4a4e69;
-    color: #fff;
-    border: none;
+.form-group select {
     cursor: pointer;
-    transition: background 0.3s;
 }
 
-.form-group button:hover {
-    background-color: #22223b;
+/* Dropdown Arrow */
+.form-group select {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath d="M7 10l5 5 5-5z" fill="%234a4e69"/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
 }
 
-/* Summary Panel */
-.summary {
-    width: 250px;
-    background-color: #e5e5e5;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.summary h3 {
-    font-size: 20px;
-    color: #4a4e69;
-    margin-bottom: 15px;
-}
-
-.summary-item, .summary-total {
+/* Bubbly Checkbox and Radio Buttons */
+.bubbly-checkbox {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+    align-items: center;
+    cursor: pointer;
     font-size: 16px;
+    margin-right: 15px;
 }
 
-.summary-total {
-    font-weight: bold;
+.bubbly-checkbox input {
+    display: none;
+}
+
+.bubbly-checkbox span {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #f4f6f8;
+    color: #333333;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin-left: 5px;
+}
+
+.bubbly-checkbox input:checked + span {
+    background-color: #4a4e69;
+    color: #ffffff;
 }
 
 /* Submit Button */
 .submit-btn {
+    width: 100%;
     background-color: #4a4e69;
     color: #fff;
     padding: 15px;
@@ -143,7 +133,7 @@ form h2 {
 }
 
 .submit-btn:hover {
-    background-color: #22223b;
+    background-color: #3d3f58;
 }
 
 /* Success Popup Styling */
@@ -172,7 +162,7 @@ form h2 {
 
 .checkmark {
     font-size: 40px;
-    color: #4CAF50; /* Green color for success */
+    color: #4CAF50;
     margin-bottom: 10px;
 }
 
@@ -183,7 +173,7 @@ form h2 {
 }
 
 .popup-content button {
-    background-color: #4CAF50; /* Green color matching theme */
+    background-color: #4CAF50;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -193,5 +183,26 @@ form h2 {
 }
 
 .popup-content button:hover {
-    background-color: #43A047; /* Slightly darker green on hover */
+    background-color: #43A047;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .sidebar {
+        max-width: 100%;
+    }
+    
+    .main-content {
+        max-width: 100%;
+        padding: 15px;
+    }
+    
+    .submit-btn {
+        font-size: 14px;
+    }
 }
