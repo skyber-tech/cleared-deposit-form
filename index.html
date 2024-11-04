@@ -20,10 +20,10 @@
         
         <!-- Main Content -->
         <div class="main-content">
-            <form id="depositForm" action="https://script.google.com/macros/s/AKfycbxFhwf2QAIpVvaUj_5oKtNafE_BbYrYo7WIZ71-EwKgTIKahfmAe3gSwkmrJuxVln0D/exec" method="post">
+            <form id="depositForm">
                 <h2>Cleared Deposit Status Update</h2>
                 
-                <!-- Entity Source -->
+                <!-- Original form fields with conditional entity fields -->
                 <div class="form-group">
                     <label for="entity">Entity Source</label>
                     <select id="entity" name="entity" required>
@@ -37,7 +37,6 @@
                     </select>
                 </div>
 
-                <!-- State Details (conditional display for OGC) -->
                 <div id="ogcFields" style="display:none;">
                     <div class="form-group">
                         <label for="state">State Name</label>
@@ -69,7 +68,6 @@
                     </div>
                 </div>
 
-                <!-- Canvassed Person with Autofill -->
                 <div class="form-group">
                     <label for="employeeID">Canvassed Person ID</label>
                     <input type="text" id="employeeID" name="employeeID" placeholder="Enter Employee ID">
@@ -81,7 +79,6 @@
                     <input type="text" id="employeeName" name="employeeName" readonly>
                 </div>
 
-                <!-- Customer Details -->
                 <div class="form-group">
                     <label for="customerName">Customer Name</label>
                     <input type="text" id="customerName" name="customerName" required>
@@ -92,7 +89,6 @@
                     <input type="text" id="customerContact" name="customerContact" required>
                 </div>
 
-                <!-- Product Sourced -->
                 <div class="form-group">
                     <label for="productSourced">Product Sourced</label>
                     <select id="productSourced" name="productSourced" required>
@@ -106,7 +102,6 @@
                     </select>
                 </div>
 
-                <!-- Payout Frequency -->
                 <div class="form-group">
                     <label for="payoutFrequency">Payout Frequency</label>
                     <select id="payoutFrequency" name="payoutFrequency" required>
@@ -117,13 +112,11 @@
                     </select>
                 </div>
 
-                <!-- Amount -->
                 <div class="form-group">
                     <label for="amount">Amount</label>
                     <input type="number" id="amount" name="amount" required>
                 </div>
 
-                <!-- Mode of Transaction -->
                 <div class="form-group">
                     <label>Mode of Transaction</label>
                     <input type="radio" id="cheque" name="transactionMode" value="Cheque" required>
@@ -132,7 +125,6 @@
                     <label for="online">Online</label>
                 </div>
 
-                <!-- Application Type -->
                 <div class="form-group">
                     <label>Application Type</label>
                     <input type="radio" id="fresh" name="applicationType" value="Fresh" required>
@@ -141,7 +133,6 @@
                     <label for="renewal">Renewal</label>
                 </div>
 
-                <!-- Confirmation and Submit -->
                 <div class="form-group">
                     <input type="checkbox" id="confirmation" name="confirmation" required>
                     <label for="confirmation">I confirm that all information entered is accurate to the best of my knowledge.</label>
@@ -152,25 +143,50 @@
         </div>
     </div>
 
-    <!-- JavaScript for functionality -->
+    <!-- Success Popup -->
+    <div id="successPopup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <div class="checkmark">
+                &#10004;
+            </div>
+            <p>Form submitted successfully!</p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for AJAX submission and popup -->
     <script>
-        // Display additional fields for OGC
-        document.getElementById("entity").addEventListener("change", function() {
-            var ogcFields = document.getElementById("ogcFields");
-            ogcFields.style.display = this.value === "OGC" ? "block" : "none";
+        document.getElementById("depositForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const formData = new FormData(document.getElementById("depositForm"));
+            fetch("https://script.google.com/macros/s/AKfycbxFhwf2QAIpVvaUj_5oKtNafE_BbYrYo7WIZ71-EwKgTIKahfmAe3gSwkmrJuxVln0D/exec", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(() => {
+                document.getElementById("successPopup").style.display = "flex";
+            })
+            .catch(error => console.error("Error:", error));
         });
 
-        // Employee data for autofill based on Employee ID
+        function closePopup() {
+            document.getElementById("successPopup").style.display = "none";
+            document.getElementById("depositForm").reset();
+        }
+
+        document.getElementById("entity").addEventListener("change", function() {
+            document.getElementById("ogcFields").style.display = this.value === "OGC" ? "block" : "none";
+        });
+
         const employeeData = {
             "OGC001": "RAMESH CR",
             "OLV001": "ANEESH K A",
             "OLV002": "TITO PAUL T",
             "OLV003": "JEESON P J",
             "OGC002": "VISHNUPRIYA P R"
-            // Add other entries as needed
         };
 
-        // Autofill employee name based on ID
         function fetchEmployeeName() {
             const employeeID = document.getElementById("employeeID").value;
             const employeeName = employeeData[employeeID];
