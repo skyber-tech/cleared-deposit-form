@@ -119,8 +119,8 @@ form h2 {
     margin-top: 10px;
 }
 
-.consent-checkbox input {
-    margin-right: 8px;
+.consent-checkbox input[type="checkbox"] {
+    margin-right: 10px;
     transform: scale(1.2);
     cursor: pointer;
     accent-color: #4a4e69;
