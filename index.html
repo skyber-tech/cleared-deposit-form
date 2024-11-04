@@ -11,11 +11,6 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <img src="https://github.com/skyber-tech/cleared-deposit-form/blob/main/Logo.png?raw=true" alt="Logo" class="logo">
-            <nav class="sidebar-nav">
-                <a href="#step1" class="active">Shipping</a>
-                <a href="#step2">Payment</a>
-                <a href="#step3">Review</a>
-            </nav>
         </aside>
         
         <!-- Main Content -->
@@ -70,8 +65,7 @@
 
                 <div class="form-group">
                     <label for="employeeID">Canvassed Person ID</label>
-                    <input type="text" id="employeeID" name="employeeID" placeholder="Enter Employee ID">
-                    <button type="button" onclick="fetchEmployeeName()">Search</button>
+                    <input type="text" id="employeeID" name="employeeID" placeholder="Enter Employee ID" onblur="fetchEmployeeName()">
                 </div>
 
                 <div class="form-group">
@@ -119,23 +113,33 @@
 
                 <div class="form-group">
                     <label>Mode of Transaction</label>
-                    <input type="radio" id="cheque" name="transactionMode" value="Cheque" required>
-                    <label for="cheque">Cheque</label>
-                    <input type="radio" id="online" name="transactionMode" value="Online" required>
-                    <label for="online">Online</label>
+                    <label class="bubbly-checkbox">
+                        <input type="radio" id="cheque" name="transactionMode" value="Cheque" required>
+                        <span>Cheque</span>
+                    </label>
+                    <label class="bubbly-checkbox">
+                        <input type="radio" id="online" name="transactionMode" value="Online" required>
+                        <span>Online</span>
+                    </label>
                 </div>
 
                 <div class="form-group">
                     <label>Application Type</label>
-                    <input type="radio" id="fresh" name="applicationType" value="Fresh" required>
-                    <label for="fresh">Fresh</label>
-                    <input type="radio" id="renewal" name="applicationType" value="Renewal" required>
-                    <label for="renewal">Renewal</label>
+                    <label class="bubbly-checkbox">
+                        <input type="radio" id="fresh" name="applicationType" value="Fresh" required>
+                        <span>Fresh</span>
+                    </label>
+                    <label class="bubbly-checkbox">
+                        <input type="radio" id="renewal" name="applicationType" value="Renewal" required>
+                        <span>Renewal</span>
+                    </label>
                 </div>
 
-                <div class="form-group">
-                    <input type="checkbox" id="confirmation" name="confirmation" required>
-                    <label for="confirmation">I confirm that all information entered is accurate to the best of my knowledge.</label>
+                <div class="form-group consent">
+                    <label class="bubbly-checkbox">
+                        <input type="checkbox" id="confirmation" name="confirmation" required>
+                        <span>I confirm that all information entered is accurate to the best of my knowledge.</span>
+                    </label>
                 </div>
 
                 <button type="submit" class="submit-btn">Save & Continue</button>
