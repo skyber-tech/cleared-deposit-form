@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced Cleared Deposit Status Update Form</title>
+    <title>Cleared Deposit Status Update Form</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -21,34 +21,55 @@
         <!-- Main Content -->
         <div class="main-content">
             <form id="depositForm" action="https://script.google.com/macros/s/AKfycbxFhwf2QAIpVvaUj_5oKtNafE_BbYrYo7WIZ71-EwKgTIKahfmAe3gSwkmrJuxVln0D/exec" method="post">
-                <h2>Shipping</h2>
+                <h2>Cleared Deposit Status Update</h2>
                 
-                <!-- Form Fields -->
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" placeholder="John" required>
-                    
-                    <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
-                </div>
-                
+                <!-- Entity Source -->
                 <div class="form-group">
                     <label for="entity">Entity Source</label>
                     <select id="entity" name="entity" required>
                         <option value="">Select Entity</option>
                         <option value="OGC">OGC</option>
                         <option value="HNI">HNI</option>
-                        <!-- More options here -->
+                        <option value="JIB">JIB</option>
+                        <option value="MSCS">MSCS</option>
+                        <option value="Oleevia Foundation">Oleevia Foundation</option>
+                        <option value="OWN Restaurant">OWN Restaurant</option>
                     </select>
                 </div>
-                
-                <div class="form-group">
-                    <label for="address">Address</label>
-                    <input type="text" id="address" name="address" placeholder="1234 Street, City, ZIP" required>
+
+                <!-- State Details (conditional display for OGC) -->
+                <div id="ogcFields" style="display:none;">
+                    <div class="form-group">
+                        <label for="state">State Name</label>
+                        <input type="text" id="state" name="state">
+                    </div>
+                    <div class="form-group">
+                        <label for="stateHead">State Head (With Employee Code)</label>
+                        <input type="text" id="stateHead" name="stateHead">
+                    </div>
+                    <div class="form-group">
+                        <label for="region">Region Name</label>
+                        <input type="text" id="region" name="region">
+                    </div>
+                    <div class="form-group">
+                        <label for="regionHead">Region Head (With Employee Code)</label>
+                        <input type="text" id="regionHead" name="regionHead">
+                    </div>
+                    <div class="form-group">
+                        <label for="cluster">Cluster Name</label>
+                        <input type="text" id="cluster" name="cluster">
+                    </div>
+                    <div class="form-group">
+                        <label for="clusterHead">Cluster Head (With Employee Code)</label>
+                        <input type="text" id="clusterHead" name="clusterHead">
+                    </div>
+                    <div class="form-group">
+                        <label for="branch">Branch Name</label>
+                        <input type="text" id="branch" name="branch">
+                    </div>
                 </div>
 
-                <!-- Additional fields as required -->
-                
+                <!-- Canvassed Person with Autofill -->
                 <div class="form-group">
                     <label for="employeeID">Canvassed Person ID</label>
                     <input type="text" id="employeeID" name="employeeID" placeholder="Enter Employee ID">
@@ -59,30 +80,81 @@
                     <label for="employeeName">Canvassed Person Name</label>
                     <input type="text" id="employeeName" name="employeeName" readonly>
                 </div>
-                
-                <!-- Submit Button -->
+
+                <!-- Customer Details -->
+                <div class="form-group">
+                    <label for="customerName">Customer Name</label>
+                    <input type="text" id="customerName" name="customerName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="customerContact">Customer Contact Details</label>
+                    <input type="text" id="customerContact" name="customerContact" required>
+                </div>
+
+                <!-- Product Sourced -->
+                <div class="form-group">
+                    <label for="productSourced">Product Sourced</label>
+                    <select id="productSourced" name="productSourced" required>
+                        <option value="">Select Product</option>
+                        <option value="NCD">NCD</option>
+                        <option value="CCD">CCD</option>
+                        <option value="SD">SD</option>
+                        <option value="Membership">Membership</option>
+                        <option value="Insurance">Insurance</option>
+                        <option value="RD">RD</option>
+                    </select>
+                </div>
+
+                <!-- Payout Frequency -->
+                <div class="form-group">
+                    <label for="payoutFrequency">Payout Frequency</label>
+                    <select id="payoutFrequency" name="payoutFrequency" required>
+                        <option value="Monthly">Monthly</option>
+                        <option value="Quarterly">Quarterly</option>
+                        <option value="Half-yearly">Half-yearly</option>
+                        <option value="Annually">Annually</option>
+                    </select>
+                </div>
+
+                <!-- Amount -->
+                <div class="form-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" id="amount" name="amount" required>
+                </div>
+
+                <!-- Mode of Transaction -->
+                <div class="form-group">
+                    <label>Mode of Transaction</label>
+                    <input type="radio" id="cheque" name="transactionMode" value="Cheque" required>
+                    <label for="cheque">Cheque</label>
+                    <input type="radio" id="online" name="transactionMode" value="Online" required>
+                    <label for="online">Online</label>
+                </div>
+
+                <!-- Application Type -->
+                <div class="form-group">
+                    <label>Application Type</label>
+                    <input type="radio" id="fresh" name="applicationType" value="Fresh" required>
+                    <label for="fresh">Fresh</label>
+                    <input type="radio" id="renewal" name="applicationType" value="Renewal" required>
+                    <label for="renewal">Renewal</label>
+                </div>
+
+                <!-- Confirmation and Submit -->
+                <div class="form-group">
+                    <input type="checkbox" id="confirmation" name="confirmation" required>
+                    <label for="confirmation">I confirm that all information entered is accurate to the best of my knowledge.</label>
+                </div>
+
                 <button type="submit" class="submit-btn">Save & Continue</button>
             </form>
-
-            <!-- Summary Panel -->
-            <div class="summary">
-                <h3>Summary</h3>
-                <div class="summary-item">
-                    <span>Black Sneakers</span>
-                    <span>$1,192.00</span>
-                </div>
-                <!-- More items here -->
-                <div class="summary-total">
-                    <span>Total</span>
-                    <span>$10,498.00</span>
-                </div>
-            </div>
         </div>
     </div>
 
-    <!-- JavaScript functionality for autofill and other behaviors -->
+    <!-- JavaScript for functionality -->
     <script>
-        // Show additional fields for OGC
+        // Display additional fields for OGC
         document.getElementById("entity").addEventListener("change", function() {
             var ogcFields = document.getElementById("ogcFields");
             ogcFields.style.display = this.value === "OGC" ? "block" : "none";
@@ -95,18 +167,14 @@
             "OLV002": "TITO PAUL T",
             "OLV003": "JEESON P J",
             "OGC002": "VISHNUPRIYA P R"
-            // Add other entries from your file as needed
+            // Add other entries as needed
         };
 
-        // Function to autofill Employee Name based on Employee ID
+        // Autofill employee name based on ID
         function fetchEmployeeName() {
             const employeeID = document.getElementById("employeeID").value;
             const employeeName = employeeData[employeeID];
-            if (employeeName) {
-                document.getElementById("employeeName").value = employeeName;
-            } else {
-                document.getElementById("employeeName").value = "Employee not found";
-            }
+            document.getElementById("employeeName").value = employeeName || "Employee not found";
         }
     </script>
 </body>
